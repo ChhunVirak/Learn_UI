@@ -1,4 +1,14 @@
 ###
-GET https://api.itbook.store/1.0/new
+GET https://api.itbook.store/1.0/api.itbook.store/new
+Content-Type: application/json
+Accept: application/json
+
+###
+GET https://api.itbook.store/1.0/search/data
+Content-Type: application/json
+Accept: application/json
+
+###
+GET https://api.itbook.store/1.0/books/9781617294136
 Content-Type: application/json
 Accept: application/json

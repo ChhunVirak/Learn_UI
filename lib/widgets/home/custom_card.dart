@@ -29,32 +29,42 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        GestureDetector(
-          onTap: onTap,
-          child: Container(
-            margin: const EdgeInsets.only(right: 20),
-            height: MediaQuery.of(context).size.height * 0.2,
-            width: MediaQuery.of(context).size.width * 0.3,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(imgUrl!),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        color: Colors.transparent,
+        margin: const EdgeInsets.only(right: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.2,
+              width: MediaQuery.of(context).size.width * 0.3,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  filterQuality: FilterQuality.high,
+                  image: NetworkImage(imgUrl!),
+                ),
               ),
             ),
-          ),
+            const SizedBox(height: 5),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.3,
+              child: Text(
+                title ?? "No Title",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(overflow: TextOverflow.ellipsis),
+              ),
+            ),
+            const SizedBox(height: 5),
+            priceLabel(context, price ?? '\$0')
+          ],
         ),
-        const SizedBox(height: 5),
-        Text(
-          title ?? "No Title",
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-        ),
-        const SizedBox(height: 5),
-        priceLabel(context, price ?? '\$0')
-      ],
+      ),
     );
   }
 }
