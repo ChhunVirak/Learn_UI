@@ -9,6 +9,8 @@ class BookController extends GetxController {
   final bookList = <MyBook>[].obs;
   final loading = false.obs;
 
+  final myList = [2, 2, 2, 2, 2].obs;
+
   Future fetchBookList() async {
     loading(true);
     apibasehelper

@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:signature/signature.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class BookScreen extends StatefulWidget {
+  const BookScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<BookScreen> createState() => _BookScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _BookScreenState extends State<BookScreen> {
   final bookController = Get.put(BookController());
   final controller = ScrollController();
   final key1 = GlobalKey();

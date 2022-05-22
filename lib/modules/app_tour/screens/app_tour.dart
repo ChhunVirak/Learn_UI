@@ -11,6 +11,7 @@ class Touring extends StatefulWidget {
   final IndexedWidgetBuilder itembuilder;
   final STEPSTYLE stepstyle;
   final VoidCallback? onEnd;
+  final VoidCallback? onSkip;
   const Touring({
     Key? key,
     required this.itemcount,
@@ -21,6 +22,7 @@ class Touring extends StatefulWidget {
     this.backstepcolor,
     this.curve,
     this.duration,
+    this.onSkip,
   }) : super(key: key);
 
   @override
@@ -33,7 +35,7 @@ class _TouringState extends State<Touring> {
       required int step,
       double space = 5.0,
       int? currentPage}) {
-    double itemWidth = (width - (space * (step + 1))) / step;
+    double itemWidth = (width - (space * (step + 1)) - 50) / step;
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       scrollDirection: Axis.horizontal,
@@ -120,8 +122,9 @@ class _TouringState extends State<Touring> {
           children: [
             Column(
               children: [
-                SizedBox(
-                  height: 20,
+                Container(
+                  color: Colors.red[100],
+                  height: 50,
                   // padding: const EdgeInsets.symmetric(vertical: 10),
                   // color: Colors.blue,
                   child: showStepBar(
@@ -179,6 +182,16 @@ class _TouringState extends State<Touring> {
                   ),
                 )
               ],
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: TextButton(
+                onPressed: () {
+                  widget.onSkip != null ? widget.onSkip!() : null;
+                },
+                child: const Text('Skip'),
+              ),
             ),
           ],
         ),

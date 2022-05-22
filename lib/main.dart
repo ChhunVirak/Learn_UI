@@ -1,4 +1,4 @@
-import 'package:change_language/modules/app_tour/screens/testscreen.dart';
+import 'package:change_language/modules/dashboard/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,9 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      // home: const TestScreen(),
-      // uncommad code bellow to build Book Store screen
-      home: const MyWidget(),
+      home: const DashBoard(),
     );
   }
 }
