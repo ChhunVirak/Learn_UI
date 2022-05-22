@@ -1,4 +1,5 @@
 import 'package:change_language/modules/app_tour/screens/testscreen.dart';
+import 'package:change_language/modules/log_in/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../home/screens/homescreen.dart';
@@ -32,5 +33,12 @@ final itemList = <ItemModel>[
     progress: 0.2,
     date: '12-Mar-2022',
     item: const Apptour(),
+  ),
+  ItemModel(
+    sheetColor: Colors.yellow,
+    title: 'Login Screen',
+    progress: 0.0,
+    date: '22-May-2022',
+    item: const LoginScreen(),
   ),
 ];
