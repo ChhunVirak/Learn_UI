@@ -1,7 +1,8 @@
 import 'dart:math';
 
+import 'package:change_language/modules/app_tour/controllers/controller.dart';
 import 'package:flutter/material.dart';
-import 'package:quiver/async.dart';
+import 'package:get/get.dart';
 
 class Apptour extends StatefulWidget {
   const Apptour({Key? key}) : super(key: key);
@@ -11,9 +12,8 @@ class Apptour extends StatefulWidget {
 }
 
 class _ApptourState extends State<Apptour> {
-  bool change = true;
   int elapsed = 10;
-
+  final controller = Get.put(ControllerCount());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,42 +47,36 @@ class _ApptourState extends State<Apptour> {
           //   },
           // ),
           SafeArea(
-        child: SizedBox(
-          height: double.infinity,
-          width: double.infinity,
-          child: AnimatedSwitcher(
-            transitionBuilder: (child, animation) {
-              return ScaleTransition(
-                scale: animation,
-                child: child,
-              );
-            },
-            child: Text(
-              "$elapsed",
-              key: ValueKey(elapsed),
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                  color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff)),
+        child: Obx(
+          () => Container(
+            alignment: Alignment.center,
+            height: double.infinity,
+            width: double.infinity,
+            child: AnimatedSwitcher(
+              transitionBuilder: (child, animation) {
+                return ScaleTransition(
+                  scale: animation,
+                  child: child,
+                );
+              },
+              child: Text(
+                "${controller.i.value}",
+                key: ValueKey(elapsed),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                    color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff)),
+              ),
+              duration: const Duration(seconds: 1),
             ),
-            duration: const Duration(seconds: 1),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            final cd = CountdownTimer(
-                const Duration(seconds: 10), const Duration(seconds: 1),
-                stopwatch: Stopwatch());
-            cd.listen((data) {
-              setState(() {
-                elapsed = cd.elapsed.inSeconds;
-              });
-            }, onDone: () {
-              cd.any((element) => false);
-            });
+            controller.increase();
           },
-          child: const Icon(Icons.text_increase)),
+          child: const Icon(Icons.add)),
     );
   }
 }

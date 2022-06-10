@@ -6,6 +6,7 @@ class DashBoardItem extends StatelessWidget {
   final double? value;
   final Color? sheetColor;
   final GestureTapCallback? onTap;
+  final bool selected;
   const DashBoardItem({
     Key? key,
     this.text,
@@ -13,6 +14,7 @@ class DashBoardItem extends StatelessWidget {
     this.date,
     this.sheetColor,
     this.value,
+    this.selected = false,
   }) : super(key: key);
 
   @override
@@ -37,8 +39,8 @@ class DashBoardItem extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Container(
-              height: 30,
+            AnimatedContainer(
+              height: selected ? 30 : 10,
               decoration: BoxDecoration(
                 color: sheetColor ?? Colors.transparent,
                 borderRadius: const BorderRadius.only(
@@ -48,6 +50,7 @@ class DashBoardItem extends StatelessWidget {
               ),
               width: 5,
               margin: const EdgeInsets.only(right: 10),
+              duration: const Duration(milliseconds: 200),
             ),
             Expanded(
               flex: 4,
@@ -76,7 +79,7 @@ class DashBoardItem extends StatelessWidget {
                 children: [
                   Text.rich(
                     TextSpan(
-                      text: '20',
+                      text: '${(value! * 100).round()}',
                       children: [
                         TextSpan(
                           text: '%',

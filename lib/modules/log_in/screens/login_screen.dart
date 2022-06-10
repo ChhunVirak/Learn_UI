@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
-  Widget cutomListTile({String? text, IconData? icon}) {
+  Widget customListTile({String? text, IconData? icon}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -29,8 +29,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
           children: [
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -164,13 +163,13 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            cutomListTile(
+            customListTile(
                 text: 'Continues with Google', icon: Icons.local_activity),
             const Divider(
               height: 0,
               color: Colors.black,
             ),
-            cutomListTile(text: 'Continues with Google', icon: Icons.home)
+            customListTile(text: 'Continues with Google', icon: Icons.home)
           ],
         ),
       ),
