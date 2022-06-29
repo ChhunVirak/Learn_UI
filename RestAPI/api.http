@@ -13,3 +13,9 @@ GET https://api.itbook.store/1.0/search/put-here
 Content-Type: application/json
 Accept: application/json
 
+###Search
+GET https://gunter-food-api.herokuapp.com/pizza
+Content-Type: application/json
+Accept: application/json
+
+

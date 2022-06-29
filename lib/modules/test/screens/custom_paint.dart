@@ -163,7 +163,7 @@ class PointPainter extends CustomPainter {
     path.lineTo(pointOnCircle.dx, pointOnCircle.dy);
     // path.lineTo(pointOnCircle.dx, center.dy);
 
-    path.close();
+    // path.close();
     canvas.drawPath(path, paint);
     canvas.drawPath(path, paint..color = Colors.red);
   }

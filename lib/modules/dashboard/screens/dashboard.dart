@@ -31,14 +31,17 @@ class DashBoard extends StatelessWidget {
                     onTap: () {
                       _con.currentItem(e.key);
                       _con.itemList.refresh();
-                      Future.delayed(const Duration(milliseconds: 500), () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => e.value.item!,
-                          ),
-                        );
-                      });
+                      Future.delayed(
+                        const Duration(milliseconds: 500),
+                        () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => e.value.item!,
+                            ),
+                          );
+                        },
+                      );
                     },
                   ),
                 )

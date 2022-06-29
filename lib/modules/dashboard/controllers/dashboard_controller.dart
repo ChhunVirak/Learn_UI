@@ -44,7 +44,7 @@ class DashBoardController extends GetxController {
       title: 'Food Panda',
       progress: 0,
       date: '9-Junexs-2022',
-      item: FoodPandaHome(),
+      item: const FoodPandaHome(),
     ),
   ].obs;
 }

@@ -9,7 +9,7 @@
 
 // class _StepLoginState extends State<StepLogin> {
 //   bool phone = true;
-//   bool 
+//   bool
 //   @override
 //   Widget build(BuildContext context) {
 //     return const Scaffold();

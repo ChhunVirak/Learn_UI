@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class Controllertest extends GetxController {
-  final apibase = ApiBaseHelper();
+  final apiBaseHelper = ApiBaseHelper();
 
   final username = ''.obs;
 
@@ -29,7 +29,55 @@ class Controllertest extends GetxController {
     } else {
       throw Exception('Failed to load data!');
     }
+  }
 
-    // }
+  ///Fetch Post by Virak
+  final postmodel = PostModel().obs;
+  final listpost = <PostModel>[].obs;
+  Future onFetchPost() async {
+    apiBaseHelper
+        .onNetworkRequesting(
+            //TODO: change url to fullurl
+            url: 'https://jsonplaceholder.typicode.com/posts',
+            methode: METHODE.get,
+            isAuthorize: false)
+        .then(
+      (response) {
+        listpost.clear();
+        response.map(
+          (e) {
+            postmodel.value = PostModel.fromJson(e);
+            listpost.add(postmodel.value);
+          },
+        ).toList();
+      },
+    ).onError((ErrorModel error, stackTrace) {
+      debugPrint('Something Error ${error.bodyString}');
+    });
+  }
+}
+
+class PostModel {
+  int? userId;
+  int? id;
+  String? title;
+  String? body;
+
+  PostModel({this.userId, this.id, this.title, this.body});
+
+  PostModel.fromJson(Map<String, dynamic> json) {
+    userId = json['userId'];
+    id = json['id'];
+    title = json['title'];
+    body = json['body'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['userId'] = userId;
+    data['id'] = id;
+    data['title'] = title;
+    data['body'] = body;
+    return data;
   }
 }
