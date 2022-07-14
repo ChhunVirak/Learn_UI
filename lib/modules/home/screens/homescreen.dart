@@ -1,11 +1,8 @@
-import 'dart:typed_data';
-
 import 'package:change_language/modules/home/controllers/home_controller.dart';
 import 'package:change_language/modules/home/screens/screen_detail.dart';
 import 'package:change_language/widgets/home/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:signature/signature.dart';
 
 class BookScreen extends StatefulWidget {
   const BookScreen({Key? key}) : super(key: key);
@@ -48,14 +45,6 @@ class _BookScreenState extends State<BookScreen> {
       default:
     }
   }
-
-  final SignatureController _controller = SignatureController(
-    penStrokeWidth: 2,
-    penColor: Colors.black,
-    exportBackgroundColor: Colors.white,
-    // onDrawStart: () => print('onDrawStart called!'),
-    // onDrawEnd: () => print('onDrawEnd called!'),
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -147,68 +136,6 @@ class _BookScreenState extends State<BookScreen> {
                       ),
                     ],
                   ),
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 15),
-                      color: Colors.teal,
-                      child: Signature(
-                        backgroundColor: Colors.transparent,
-                        controller: _controller,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          _controller.undo();
-                        },
-                        child: const Text('Undo'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          _controller.clear();
-                        },
-                        child: const Text('Clear'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          _controller.redo();
-                        },
-                        child: const Text('Redo'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          final Uint8List? data =
-                              await _controller.toPngBytes();
-                          showDialog(
-                            context: context,
-                            builder: (context) => Container(
-                              height: 200,
-                              padding: const EdgeInsets.all(5),
-                              child: Column(
-                                children: [
-                                  data != null
-                                      ? Image.memory(data)
-                                      : Expanded(
-                                          child: Container(
-                                          color: Colors.white,
-                                        )),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('Back'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                        child: const Text('Show'),
-                      ),
-                    ],
-                  )
                 ],
               ),
             ),

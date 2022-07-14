@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DashBoardItem extends StatelessWidget {
   final String? text;
@@ -25,15 +26,15 @@ class DashBoardItem extends StatelessWidget {
         margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
         padding: const EdgeInsets.fromLTRB(0, 20, 10, 20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Get.isDarkMode ? Colors.grey[900] : Colors.white,
           borderRadius: BorderRadius.circular(10),
           // border: Border.all(color: Colors.teal, width: 2),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
-              color: Colors.black12,
+              color: Get.isDarkMode ? Colors.black : Colors.black12,
               spreadRadius: 0.1,
               blurRadius: 4,
-              offset: Offset(1, 1),
+              offset: const Offset(1, 1),
             ),
           ],
         ),
@@ -62,13 +63,13 @@ class DashBoardItem extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .labelLarge!
-                        .copyWith(fontSize: 15),
+                        .copyWith(fontSize: 15, fontWeight: FontWeight.w300),
                   ),
                   Text(
                     date ?? '- - -',
                     style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                          decoration: TextDecoration.underline,
-                        ),
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.w200),
                   ),
                 ],
               ),
@@ -80,13 +81,17 @@ class DashBoardItem extends StatelessWidget {
                   Text.rich(
                     TextSpan(
                       text: '${(value! * 100).round()}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelSmall!
+                          .copyWith(fontWeight: FontWeight.w300),
                       children: [
                         TextSpan(
                           text: '%',
                           style: Theme.of(context)
                               .textTheme
                               .labelSmall!
-                              .copyWith(),
+                              .copyWith(fontWeight: FontWeight.w300),
                         ),
                       ],
                     ),
@@ -103,7 +108,10 @@ class DashBoardItem extends StatelessWidget {
                   ),
                   Text(
                     'Progress',
-                    style: Theme.of(context).textTheme.labelSmall!.copyWith(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelSmall!
+                        .copyWith(fontWeight: FontWeight.w300),
                   ),
                 ],
               ),

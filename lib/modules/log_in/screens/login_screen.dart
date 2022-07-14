@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
-  Widget customListTile({String? text, IconData? icon}) {
+  Widget customListTile(BuildContext context, {String? text, IconData? icon}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      decoration: const BoxDecoration(color: Colors.white),
+      decoration:
+          BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
       alignment: Alignment.centerLeft,
       child: Row(
         children: [
@@ -27,9 +28,10 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      // backgroundColor: Colors.grey[100],
       body: SafeArea(
-        child: ListView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -125,7 +127,8 @@ class LoginScreen extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              decoration: const BoxDecoration(color: Colors.white),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor),
               alignment: Alignment.centerLeft,
               child: Row(
                 children: const [
@@ -147,7 +150,8 @@ class LoginScreen extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              decoration: const BoxDecoration(color: Colors.white),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor),
               alignment: Alignment.centerLeft,
               child: Row(
                 children: const [
@@ -163,13 +167,14 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            customListTile(
+            customListTile(context,
                 text: 'Continues with Google', icon: Icons.local_activity),
             const Divider(
               height: 0,
               color: Colors.black,
             ),
-            customListTile(text: 'Continues with Google', icon: Icons.home)
+            customListTile(context,
+                text: 'Continues with Google', icon: Icons.home)
           ],
         ),
       ),

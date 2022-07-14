@@ -37,7 +37,6 @@ class Controllertest extends GetxController {
   Future onFetchPost() async {
     apiBaseHelper
         .onNetworkRequesting(
-            //TODO: change url to fullurl
             url: 'https://jsonplaceholder.typicode.com/posts',
             methode: METHODE.get,
             isAuthorize: false)

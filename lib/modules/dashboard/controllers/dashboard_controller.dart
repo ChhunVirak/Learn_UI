@@ -10,6 +10,7 @@ import '../models/item_model.dart';
 
 class DashBoardController extends GetxController {
   final currentItem = 0.obs;
+  final isnightMode = false.obs;
   final itemList = <ItemModel>[
     ItemModel(
       sheetColor: Colors.red,

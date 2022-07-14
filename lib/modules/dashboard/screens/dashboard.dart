@@ -1,5 +1,6 @@
 import 'package:change_language/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:change_language/widgets/dashboard/dashboard_item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,9 +11,49 @@ class DashBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     final _con = Get.put(DashBoardController());
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        elevation: 0,
-        title: const Text('Screens'),
+        automaticallyImplyLeading: false,
+        centerTitle: false,
+        elevation: 1,
+        title: const Text('Flutter'),
+        titleTextStyle: TextStyle(
+            color: Get.isDarkMode ? Colors.grey[100] : Colors.black,
+            fontWeight: FontWeight.w500,
+            fontSize: 20),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.apps_rounded,
+              // color: Colors.black,
+            ),
+          ),
+        ),
+        actions: [
+          Obx(
+            () => Transform.scale(
+              scale: 0.8,
+              child: CupertinoSwitch(
+                activeColor: Colors.grey[900],
+                trackColor: Colors.grey[200],
+                thumbColor: Colors.red,
+                value: _con.isnightMode.value,
+                onChanged: (v) {
+                  _con.isnightMode(v);
+                  if (_con.isnightMode.value) {
+                    Get.changeTheme(ThemeData.dark());
+                  } else {
+                    Get.changeTheme(ThemeData.light());
+                  }
+                },
+              ),
+            ),
+          ),
+          const SizedBox(width: 10)
+        ],
       ),
       body: SafeArea(
         child: Obx(

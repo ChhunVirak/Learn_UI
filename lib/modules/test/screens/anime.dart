@@ -9,33 +9,29 @@ class Anime extends StatelessWidget {
   Widget build(BuildContext context) {
     AnimeController controller = Get.put(AnimeController());
     return Scaffold(
-      body: Column(
-        children: [
-          Center(
-            child: Obx(
-              () => Transform.rotate(
-                angle: controller.rotate.toDouble(),
-                child: Stack(
-                  alignment: Alignment.topRight,
-                  children: const [
-                    Icon(
-                      Icons.alarm,
-                      size: 30,
-                    ),
-                    CircleAvatar(
-                      backgroundColor: Colors.red,
-                      radius: 7,
-                      child: Text(
-                        '2',
-                        style: TextStyle(fontSize: 10),
-                      ),
-                    )
-                  ],
+      body: Center(
+        child: Obx(
+          () => Transform.rotate(
+            angle: controller.rotate.toDouble(),
+            child: Stack(
+              alignment: Alignment.topRight,
+              children: const [
+                Icon(
+                  Icons.alarm,
+                  size: 30,
                 ),
-              ),
+                CircleAvatar(
+                  backgroundColor: Colors.red,
+                  radius: 7,
+                  child: Text(
+                    '2',
+                    style: TextStyle(fontSize: 10),
+                  ),
+                )
+              ],
             ),
           ),
-        ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

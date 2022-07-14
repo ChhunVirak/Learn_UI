@@ -6,16 +6,14 @@ class MyCustomPaint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.black,
-      body: Center(
-        child: Container(
-          color: Colors.black,
-          height: 300,
-          width: 300,
-          child: CustomPaint(
-            //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-            painter: MyPainter(),
-          ),
+      backgroundColor: Colors.grey[900],
+      body: SizedBox(
+        height: double.infinity,
+        width: double.infinity,
+        child: CustomPaint(
+          foregroundPainter: MyPainter(),
+          //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+          // painter: MyPainter(),
         ),
       ),
     );
@@ -25,52 +23,22 @@ class MyCustomPaint extends StatelessWidget {
 class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
+    double w = size.width;
+    double h = size.height - 50;
     var paint = Paint()
-      ..color = Colors.red
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 10;
-    final arc1 = Path();
+      ..color = const Color.fromARGB(255, 151, 169, 187)
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 1;
+    final path = Path();
 
-    arc1.moveTo(0, 0);
-    arc1.relativeCubicTo(1, 2, 3, 4, 5, 6);
+    path.moveTo(0, 0);
+    path.lineTo(0, h * 0.6);
+    path.quadraticBezierTo(w * 0.001, h * 0.745, w * 0.3, h * 0.75);
+    path.quadraticBezierTo(w * 0.999, h * 0.745, w, h * 0.9);
+    path.lineTo(w, 0);
 
-    ///
-    // arc1.moveTo(size.width * 0.5, 0);
-    // arc1.lineTo(size.width * 0.1, 0);
-    // arc1.relativeArcToPoint(Offset(0, size.height * 0.1), clockwise: true);
-    // arc1.lineTo(0, size.height * 0.9);
-    // arc1.arcToPoint(
-    //   Offset(size.width * 0.1, size.height),
-    //   clockwise: false,
-    //   radius: const Radius.circular(30),
-    // );
-    // arc1.lineTo(size.width * 0.9, size.height);
-    // arc1.arcToPoint(
-    //   Offset(size.width, size.height * 0.9),
-    //   clockwise: false,
-    //   radius: const Radius.circular(30),
-    // );
-    // arc1.lineTo(size.width, size.height * 0.8);
-    // arc1.arcToPoint(
-    //   Offset(size.width * 0.9, size.height * 0.7),
-    //   // clockwise: false,
-    //   // radius: const Radius.circular(40),
-    // );
-    // arc1.lineTo(size.width * 0.9, size.height * 0.3);
-    // arc1.arcToPoint(
-    //   Offset(size.width, size.height * 0.2),
-    //   // clockwise: false,
-    //   // radius: const Radius.circular(50),
-    // );
-    // arc1.lineTo(size.width, size.height * 0.1);
-    // // arc1.quadraticBezierTo(x1, y1, x2, y2)
-    // arc1.arcToPoint(
-    //   Offset(size.width * 0.9, 0),
-    //   clockwise: false,
-    //   radius: const Radius.circular(30),
-    // );
-    // arc1.close();
-    canvas.drawPath(arc1, paint);
+    path.close();
+    canvas.drawPath(path, paint);
   }
 
   @override

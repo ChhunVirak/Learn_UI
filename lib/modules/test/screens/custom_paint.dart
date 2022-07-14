@@ -83,7 +83,7 @@ class CirclePainter extends CustomPainter {
     ));
     canvas.drawPath(path, paint);
 
-    var path1 = Path();
+    // var path1 = Path();
     path.addOval(
       Rect.fromCircle(
         center: Offset(size.width / 2, size.height / 2),
@@ -113,16 +113,16 @@ class PointPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
-    var innerCirclePaint = Paint()
-      ..color = Colors.red
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
-    var paintminute = Paint()
-      ..color = Colors.green
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
+    // var innerCirclePaint = Paint()
+    //   ..color = Colors.red
+    //   ..strokeWidth = 2
+    //   ..style = PaintingStyle.stroke
+    //   ..strokeCap = StrokeCap.round;
+    // var paintminute = Paint()
+    //   ..color = Colors.green
+    //   ..strokeWidth = 2
+    //   ..style = PaintingStyle.stroke
+    //   ..strokeCap = StrokeCap.round;
 
     const textSpan = TextSpan(
       text: "60",
