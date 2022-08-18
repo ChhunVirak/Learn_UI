@@ -63,9 +63,10 @@ class _ApptourState extends State<Apptour> {
                 "${controller.i.value}",
                 key: ValueKey(elapsed),
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff)),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff),
+                ),
               ),
               duration: const Duration(seconds: 1),
             ),

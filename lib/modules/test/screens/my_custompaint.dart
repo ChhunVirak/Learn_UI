@@ -6,44 +6,66 @@ class MyCustomPaint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
-      body: SizedBox(
-        height: double.infinity,
-        width: double.infinity,
-        child: CustomPaint(
-          foregroundPainter: MyPainter(),
-          //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-          // painter: MyPainter(),
+      // backgroundColor: const Color(0xff121212),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            CustomPaint(
+              painter: _ShadowPaint(
+                shadowColor: Colors.red,
+                offset: const Offset(0, 10),
+              ),
+              child: Container(
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Colors.green[900],
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                alignment: Alignment.center,
+                child: const Text(
+                  'Test Shadow',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class MyPainter extends CustomPainter {
+class _ShadowPaint extends CustomPainter {
+  final Color? shadowColor;
+
+  final Offset? offset;
+
+  _ShadowPaint({
+    required this.shadowColor,
+    this.offset,
+  });
   @override
   void paint(Canvas canvas, Size size) {
     double w = size.width;
-    double h = size.height - 50;
-    var paint = Paint()
-      ..color = const Color.fromARGB(255, 151, 169, 187)
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 1;
-    final path = Path();
+    double h = size.height;
 
-    path.moveTo(0, 0);
-    path.lineTo(0, h * 0.6);
-    path.quadraticBezierTo(w * 0.001, h * 0.745, w * 0.3, h * 0.75);
-    path.quadraticBezierTo(w * 0.999, h * 0.745, w, h * 0.9);
-    path.lineTo(w, 0);
+    final _centerPoint = Offset(w / 2, h / 2 + offset!.dy);
 
-    path.close();
-    canvas.drawPath(path, paint);
+    final _shadow =
+        Rect.fromCenter(center: _centerPoint, width: w - 50, height: h);
+    var _shadowPaint = Paint()
+      ..color = const Color(0xff121212).withOpacity(0.9)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
+    canvas.drawRect(_shadow, _shadowPaint);
+
+    // canvas.drawRRect(_rRect, _paint);
   }
 
   @override
-  bool shouldRepaint(MyPainter oldDelegate) => false;
+  bool shouldRepaint(_ShadowPaint oldDelegate) => false;
 
   @override
-  bool shouldRebuildSemantics(MyPainter oldDelegate) => false;
+  bool shouldRebuildSemantics(_ShadowPaint oldDelegate) => false;
 }
