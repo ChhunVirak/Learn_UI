@@ -48,8 +48,8 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double _heigh = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
+    double heigh = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Obx(
         () => bookController.loading.value
@@ -63,7 +63,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 children: [
                   Container(
                     alignment: Alignment.topCenter,
-                    height: _heigh,
+                    height: heigh,
                     child: Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -72,7 +72,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               bookController.bookDetail.value.image!),
                         ),
                       ),
-                      height: _heigh / 2,
+                      height: heigh / 2,
                     ),
                   ),
 
@@ -90,8 +90,8 @@ class _DetailScreenState extends State<DetailScreen> {
                               topLeft: Radius.circular(25),
                             ),
                           ),
-                          height: (_heigh / 2) + 20,
-                          width: _width,
+                          height: (heigh / 2) + 20,
+                          width: width,
                           // alignment: Alignment.center,
                           child: Padding(
                             padding: const EdgeInsets.only(

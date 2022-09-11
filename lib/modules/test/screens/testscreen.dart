@@ -34,12 +34,12 @@ class _TestScreenState extends State<TestScreen> {
                 angle: 3 * 3.14 / 2,
                 child: CircleAvatar(
                   radius: 100,
+                  backgroundColor: returnColor(number),
                   child: Text(
                     '$number',
                     style: const TextStyle(
                         fontSize: 50, fontWeight: FontWeight.bold),
                   ),
-                  backgroundColor: returnColor(number),
                   // number == 0
                   //     ? (Colors.red)
                   //     : (number == 1 ? Colors.green : Colors.blue),

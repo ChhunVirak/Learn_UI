@@ -25,9 +25,9 @@ class _BookScreenState extends State<BookScreen> {
   }
 
   Future scrollToItem(int index) async {
-    final _context = setkey(index).currentContext;
+    final context = setkey(index).currentContext;
     await Scrollable.ensureVisible(
-      _context,
+      context,
       alignment: 0.5,
       curve: Curves.easeInCubic,
       duration: const Duration(milliseconds: 500),

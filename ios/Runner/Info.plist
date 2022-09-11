@@ -6,6 +6,12 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Change Language</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need to access your Photo Library to upload profile picture.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need to access your Camera to take profile picture and scan QR code.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need to access your microphone to record your voice.</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

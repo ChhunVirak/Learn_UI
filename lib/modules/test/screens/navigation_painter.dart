@@ -13,30 +13,6 @@ class _NavigationPaintState extends State<NavigationPaint> {
   bool click = false;
 
   void buttonClick(BuildContext context) {
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //   SnackBar(
-    //     // padding: const EdgeInsets.symmetric(horizontal: 20),
-    //     // dismissDirection: DismissDirection.up,
-    //     // action: SnackBarAction(
-    //     //   label: 'hello',
-    //     //   onPressed: () {},
-    //     // ),
-    //     behavior: SnackBarBehavior.floating,
-    //     backgroundColor: Colors.transparent,
-
-    //     content: Stack(
-    //       children: const [
-    //         SnackContainer(),
-    //         // const CircularProgressIndicator(
-    //         //   value: 1,
-    //         // )
-    //       ],
-    //     ),
-    //     elevation: 0,
-    //     // padding: EdgeInsets.zero,
-    //     // shape: const StadiumBorder(),
-    //   ),
-    // );
     click = true;
     setState(() {});
     Timer(const Duration(milliseconds: 200), () {
@@ -302,15 +278,15 @@ class NavigationPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     double w = size.width;
     double h = size.height;
-    Paint _paint = Paint()
-      ..color = Colors.black
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2;
-    Path _path = Path();
+    // Paint paint = Paint()
+    //   ..color = Colors.black
+    //   ..style = PaintingStyle.stroke
+    //   ..strokeWidth = 2;
+    Path path = Path();
 
-    _path.moveTo(0, 0);
-    _path.relativeQuadraticBezierTo(1, 1, w * 0.2, h * 0.3);
-    _path.close();
+    path.moveTo(0, 0);
+    path.relativeQuadraticBezierTo(1, 1, w * 0.2, h * 0.3);
+    path.close();
     // canvas.drawPath(_path, _paint);
     const textStyle = TextStyle(
       color: Colors.black,

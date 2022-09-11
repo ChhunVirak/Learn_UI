@@ -9,9 +9,9 @@ class FoodController extends GetxController {
   final listPizza = <PizzaModel>[].obs;
   final isloading = false.obs;
 
-  Future getListPizza() async {
+  Future<List<PizzaModel>> getListPizza() async {
     isloading.value = true;
-    apibasehelper
+    await apibasehelper
         .onNetworkRequesting(
       url: 'https://gunter-food-api.herokuapp.com/pizza',
       methode: METHODE.get,
@@ -27,5 +27,6 @@ class FoodController extends GetxController {
         isloading.value = false;
       },
     );
+    return listPizza;
   }
 }

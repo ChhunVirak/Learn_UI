@@ -1,7 +1,7 @@
 import 'package:change_language/helpers/api_base_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as https;
 
 class Controllertest extends GetxController {
   final apiBaseHelper = ApiBaseHelper();
@@ -23,7 +23,7 @@ class Controllertest extends GetxController {
     String url = "http://172.23.5.236:8081/a1/php/login_user.php";
 
     var response =
-        await http.post(Uri.parse(url), body: {"email": "sss`12234"});
+        await https.post(Uri.parse(url), body: {"email": "sss`12234"});
     if (response.statusCode == 200 || response.statusCode == 400) {
       debugPrint("debug => ${response.body}");
     } else {

@@ -7,7 +7,7 @@ class AnimatedListt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<AnimatedListState> _key = GlobalKey();
+    final GlobalKey<AnimatedListState> key = GlobalKey();
     final cont = Get.put(BookController());
     return Scaffold(
       body: Row(
@@ -39,7 +39,7 @@ class AnimatedListt extends StatelessWidget {
         children: [
           FloatingActionButton(
             onPressed: () {
-              _key.currentState!
+              key.currentState!
                   .insertItem(0, duration: const Duration(seconds: 1));
               // cont.myList.add(1);
               cont.myList.refresh();
@@ -49,7 +49,7 @@ class AnimatedListt extends StatelessWidget {
           ),
           FloatingActionButton(
             onPressed: () {
-              _key.currentState!
+              key.currentState!
                   .insertItem(0, duration: const Duration(seconds: 1));
               cont.myList.add(1);
               cont.myList.refresh();

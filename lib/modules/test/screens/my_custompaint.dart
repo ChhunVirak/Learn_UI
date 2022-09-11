@@ -51,14 +51,14 @@ class _ShadowPaint extends CustomPainter {
     double w = size.width;
     double h = size.height;
 
-    final _centerPoint = Offset(w / 2, h / 2 + offset!.dy);
+    final centerPoint = Offset(w / 2, h / 2 + offset!.dy);
 
-    final _shadow =
-        Rect.fromCenter(center: _centerPoint, width: w - 50, height: h);
-    var _shadowPaint = Paint()
+    final shadow =
+        Rect.fromCenter(center: centerPoint, width: w - 50, height: h);
+    var shadowPaint = Paint()
       ..color = const Color(0xff121212).withOpacity(0.9)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
-    canvas.drawRect(_shadow, _shadowPaint);
+    canvas.drawRect(shadow, shadowPaint);
 
     // canvas.drawRRect(_rRect, _paint);
   }

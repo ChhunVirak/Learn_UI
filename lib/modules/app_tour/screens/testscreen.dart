@@ -59,6 +59,7 @@ class _ApptourState extends State<Apptour> {
                   child: child,
                 );
               },
+              duration: const Duration(seconds: 1),
               child: Text(
                 "${controller.i.value}",
                 key: ValueKey(elapsed),
@@ -68,7 +69,6 @@ class _ApptourState extends State<Apptour> {
                   color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff),
                 ),
               ),
-              duration: const Duration(seconds: 1),
             ),
           ),
         ),

@@ -5,10 +5,10 @@ class LearnCustomPaint extends StatefulWidget {
   const LearnCustomPaint({Key? key}) : super(key: key);
 
   @override
-  _LearnCustomPaintState createState() => _LearnCustomPaintState();
+  LearnCustomPaintState createState() => LearnCustomPaintState();
 }
 
-class _LearnCustomPaintState extends State<LearnCustomPaint>
+class LearnCustomPaintState extends State<LearnCustomPaint>
     with SingleTickerProviderStateMixin {
   final _radius = 100.0;
 
@@ -24,9 +24,9 @@ class _LearnCustomPaintState extends State<LearnCustomPaint>
       duration: const Duration(seconds: 1),
     );
 
-    Tween<double> _rotationTween = Tween(begin: -math.pi, end: math.pi);
+    Tween<double> rotationTween = Tween(begin: -math.pi, end: math.pi);
 
-    animation = _rotationTween.animate(controller)
+    animation = rotationTween.animate(controller)
       ..addListener(() {
         setState(() {});
       })

@@ -17,40 +17,40 @@ enum METHODE {
 class ApiBaseHelper extends GetConnect {
   Future<dynamic> onNetworkRequesting(
       {required String url,
-      String? token,
-      Map<String, String>? header,
+      String? tokend,
+      Map<String, String>? headers,
       Map<String, dynamic>? body,
       required METHODE? methode,
       required bool isAuthorize,
       bool isConvertToByte = false}) async {
-    final _token = token ?? '';
+    final token = tokend ?? '';
     final fullUrl = url;
-    Map<String, String> _header = {
+    Map<String, String> header = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': isAuthorize ? 'Bearer $_token' : ''
+      'Authorization': isAuthorize ? 'Bearer $token' : ''
     };
     try {
       switch (methode) {
         case METHODE.get:
-          final response = await get(fullUrl, headers: header ?? _header);
+          final response = await get(fullUrl, headers: headers ?? header);
           return _returnResponse(response, isConvertToByte);
         case METHODE.post:
           if (body != null) {
             final response = await post(fullUrl, json.encode(body),
-                headers: header ?? _header);
+                headers: headers ?? header);
             return _returnResponse(response, isConvertToByte);
           }
           return Future.error(
               const ErrorModel(bodyString: 'Body must be included'));
 
         case METHODE.delete:
-          final response = await delete(fullUrl, headers: header ?? _header);
+          final response = await delete(fullUrl, headers: headers ?? header);
           return _returnResponse(response, isConvertToByte);
         case METHODE.update:
           if (body != null) {
             final response = await put(fullUrl, json.encode(body),
-                headers: header ?? _header);
+                headers: headers ?? header);
             return _returnResponse(response, isConvertToByte);
           }
           return Future.error(

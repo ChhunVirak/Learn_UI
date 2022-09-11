@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:change_language/modules/test/screens/custom_image_picker.dart';
 import 'package:change_language/modules/test/screens/user_model.dart';
 import 'package:change_language/widgets/enhance_dropdown.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,6 +39,8 @@ class _TestdropDownState extends State<TestdropDown> {
     return listUser;
   }
 
+  // final ImagePicker _picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +71,7 @@ class _TestdropDownState extends State<TestdropDown> {
             child: EnhancedDropDown(
               selectedmapper: (v) {
                 var text = v as UserModel;
-                return text.email.toString() + ' name';
+                return text.username.toString();
               },
               hintText: 'Username',
               // initialText: 'Hello Guy',
@@ -99,12 +102,18 @@ class _TestdropDownState extends State<TestdropDown> {
               hintText: 'hello',
               itembuilder: (_, __, ___) => const Text('data'),
               itemCount: 3),
+          const CustomImagePicker(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               shape: const StadiumBorder(),
             ),
             onPressed: () {
-              fetchData();
+              // fetchData();
+              CustomImagePicker.showBottomSheet(
+                  context: context,
+                  onSelected: (v) {
+                    debugPrint('$v');
+                  });
             },
             child: const Text('Start Fetch'),
           )

@@ -9,7 +9,7 @@ class DashBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _con = Get.put(DashBoardController());
+    final con = Get.put(DashBoardController());
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -40,10 +40,10 @@ class DashBoard extends StatelessWidget {
                 activeColor: Colors.grey[900],
                 trackColor: Colors.grey[200],
                 thumbColor: Colors.red,
-                value: _con.isnightMode.value,
+                value: con.isnightMode.value,
                 onChanged: (v) {
-                  _con.isnightMode(v);
-                  if (_con.isnightMode.value) {
+                  con.isnightMode(v);
+                  if (con.isnightMode.value) {
                     Get.changeTheme(ThemeData.dark());
                   } else {
                     Get.changeTheme(ThemeData.light());
@@ -59,19 +59,19 @@ class DashBoard extends StatelessWidget {
         child: Obx(
           () => ListView(
             padding: const EdgeInsets.only(top: 20),
-            children: _con.itemList
+            children: con.itemList
                 .asMap()
                 .entries
                 .map(
                   (e) => DashBoardItem(
-                    selected: e.key == _con.currentItem.value,
+                    selected: e.key == con.currentItem.value,
                     value: e.value.progress,
                     sheetColor: e.value.sheetColor,
                     text: e.value.title,
                     date: e.value.date,
                     onTap: () {
-                      _con.currentItem(e.key);
-                      _con.itemList.refresh();
+                      con.currentItem(e.key);
+                      con.itemList.refresh();
                       Future.delayed(
                         const Duration(milliseconds: 500),
                         () {
