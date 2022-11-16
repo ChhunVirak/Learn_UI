@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-typedef SelectedMapper<String> = String Function(String item);
-
 class EnhancedDropDown extends StatefulWidget {
   final String? initialText;
   final String? hintText;
@@ -20,7 +18,7 @@ class EnhancedDropDown extends StatefulWidget {
     this.initialText,
     required this.dataSource,
     required this.itembuilder,
-    required this.itemCount,
+    required this.itemCount,  
     this.onChange,
     this.hintText,
     this.selectedmapper,

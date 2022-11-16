@@ -1,19 +1,37 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MyAnimationController extends GetxController
+class GetxAnimationController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  late AnimationController animationController;
+  AnimationController? animationController;
+  double stepValue = 1 / 3;
+  double total = 0.0;
 
   @override
   void onInit() {
-    animationController = AnimationController(vsync: this);
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(
+        milliseconds: 500,
+      ),
+    );
     super.onInit();
   }
 
-  @override
-  void onClose() {
-    animationController.dispose();
-    super.onClose();
+  Future<void> animatedNext() async {
+    total = total + stepValue;
+    animationController!.reset();
+    animationController!.forward();
+    animationController!.addListener(() {
+      update();
+    });
   }
+
+  // @override
+  // void onClose() {
+  //   animationController?.dispose();
+  //   super.onClose();
+  // }
 }

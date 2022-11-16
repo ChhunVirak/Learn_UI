@@ -30,7 +30,7 @@ class Touring extends StatefulWidget {
 }
 
 class _TouringState extends State<Touring> {
-  Widget showStepBar(
+  Widget _showStepBar(
       {required double width,
       required int step,
       double space = 5.0,
@@ -127,7 +127,7 @@ class _TouringState extends State<Touring> {
                   height: 50,
                   // padding: const EdgeInsets.symmetric(vertical: 10),
                   // color: Colors.blue,
-                  child: showStepBar(
+                  child: _showStepBar(
                       width: width,
                       step: widget.itemcount,
                       space: 5,
@@ -170,7 +170,7 @@ class _TouringState extends State<Touring> {
                             if (page < widget.itemcount - 1) {
                               page++;
                             } else {
-                              widget.onEnd != null ? widget.onEnd!() : null;
+                              widget.onEnd?.call();
                             }
                             nextPage(page);
                           });
@@ -188,7 +188,7 @@ class _TouringState extends State<Touring> {
               right: 0,
               child: TextButton(
                 onPressed: () {
-                  widget.onSkip != null ? widget.onSkip!() : null;
+                  widget.onSkip?.call();
                 },
                 child: const Text('Skip'),
               ),
