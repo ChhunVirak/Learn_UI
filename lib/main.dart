@@ -1,7 +1,8 @@
+import 'package:change_language/binding/app_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'modules/test/screens/anime.dart';
+import 'modules/cv_gen/screen/cv_page.dart';
 
 Future<void> main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -15,12 +16,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialBinding: AppBinding(),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.red,
+        // textTheme: const TextTheme(
+        //   headline4: TextStyle(
+        //     color: Colors.black,
+        //     fontWeight: FontWeight.bold,
+        //     fontSize: 16,
+        //   ),
+        //   headline6: TextStyle(
+        //     color: Colors.black,
+        //     fontWeight: FontWeight.w600,
+        //     fontSize: 14,
+        //   ),
+        //   subtitle2: TextStyle(
+        //     color: Colors.black,
+        //     fontWeight: FontWeight.w400,
+        //     fontSize: 12,
+        //   ),
+        // ),
       ),
-      home: const Anime(),
+      home: const CVPage(),
     );
   }
 }
