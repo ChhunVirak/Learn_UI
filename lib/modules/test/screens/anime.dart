@@ -75,7 +75,7 @@ class _AnimeState extends State<Anime> {
             Expanded(
                 child: NotificationListener(
               onNotification: (ScrollEndNotification v) {
-                double maxScrollExtent = v.metrics.maxScrollExtent;
+                // double maxScrollExtent = v.metrics.maxScrollExtent;
                 try {
                   if (getYPositioned(key)) {
                     selectedIndex = 0;

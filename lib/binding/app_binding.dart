@@ -1,5 +1,6 @@
-import 'package:change_language/modules/cv_gen/controler/cv_controller.dart';
 import 'package:get/get.dart';
+
+import '../modules/cv_gen/controller/cv_controller.dart';
 
 class AppBinding extends Bindings {
   @override

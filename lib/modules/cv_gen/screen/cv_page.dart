@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../component/cv_component.dart';
-import '../controler/cv_controller.dart';
+import '../controller/cv_controller.dart';
 
 class CVPage extends StatefulWidget {
   const CVPage({Key? key}) : super(key: key);
@@ -12,7 +12,8 @@ class CVPage extends StatefulWidget {
 }
 
 class _CVPageState extends State<CVPage> {
-  final key = GlobalKey();
+  final page1 = GlobalKey();
+  final page2 = GlobalKey();
 
   final _controller = Get.put(CvController());
   @override
@@ -28,7 +29,34 @@ class _CVPageState extends State<CVPage> {
         actions: [
           IconButton(
             onPressed: () {
-              _controller.captureAndSave(key);
+              // _controller.onSaveAll(
+              //   [page1, page2],
+              // );
+              showDialog(
+                // barrierDismissible: false,
+                context: context,
+                builder: (context) => Center(
+                  child: Obx(
+                    () => Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.all(20),
+                      height: 50,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const BodyText('Procesing . . .'),
+                          LinearProgressIndicator(
+                            value: _controller.processing.value,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
             },
             icon: const Icon(Icons.file_download_rounded),
           )
@@ -44,12 +72,13 @@ class _CVPageState extends State<CVPage> {
                   headline4: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 14,
+                    decoration: TextDecoration.underline,
                   ),
                   headline6: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w600,
-                    fontSize: 14,
+                    fontSize: 12,
                   ),
                   subtitle2: TextStyle(
                     color: Colors.black,
@@ -62,7 +91,7 @@ class _CVPageState extends State<CVPage> {
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 children: [
                   RepaintBoundary(
-                    key: key,
+                    key: page1,
                     child: Stack(
                       children: [
                         Paper(
@@ -73,10 +102,13 @@ class _CVPageState extends State<CVPage> {
                                 child: HeaderText('CURRICULUM VITAE\n'),
                               ),
                               TitleText(_.cvdata.name),
-                              const SizedBox(height: 5),
-                              const TextContent(
+                              TextContent(
+                                name: 'Name',
+                                data: _.cvdata.name,
+                              ),
+                              TextContent(
                                 name: 'Address',
-                                data: '',
+                                data: _.cvdata.address?.location,
                               ),
                               TextContent(
                                 name: 'Tel',
@@ -90,7 +122,6 @@ class _CVPageState extends State<CVPage> {
                                 name: 'Apply for',
                                 data: _.cvdata.position,
                               ),
-                              const CVDivider(),
                               const TitleText('PERSONAL INFORMATION'),
                               TextContent(
                                 name: 'Nationality',
@@ -112,7 +143,7 @@ class _CVPageState extends State<CVPage> {
                                 name: 'Place of Birth',
                                 data: _.cvdata.placeofbirth?.location,
                               ),
-                              const TitleText('EDUCATION BACKGROUND'),
+                              const TitleText('EDUCATION'),
                               Column(
                                 children: _.cvdata.educations!
                                     .map(
@@ -123,23 +154,33 @@ class _CVPageState extends State<CVPage> {
                                     )
                                     .toList(),
                               ),
-                              const TitleText('TRAINING COURSES'),
+                              const TitleText('LANGUAGE'),
+                              Column(
+                                children: _.cvdata.languages!
+                                    .map(
+                                      (e) => TextContent(
+                                        name: e.getlanguage,
+                                        data: e.getlevel,
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
                             ],
                           ),
                         ),
                         Positioned(
-                          top: 20,
-                          right: 20,
+                          top: 60,
+                          right: 30,
                           child: Container(
                             width: 50,
-                            decoration: const BoxDecoration(
-                                // border: Border.all(
-                                //   color: Colors.black,
-                                // ),
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                        'https://i.pinimg.com/originals/3a/82/b4/3a82b40cfaaf7ae99f8d2f2faaab277e.png'))),
+                            decoration: const BoxDecoration(),
+                            // border: Border.all(
+                            //   color: Colors.black,
+                            // ),
+                            // image: DecorationImage(
+                            //     fit: BoxFit.cover,
+                            //     image: NetworkImage(
+                            //         'https://i.pinimg.com/originals/3a/82/b4/3a82b40cfaaf7ae99f8d2f2faaab277e.png'))),
                             child: const AspectRatio(
                               aspectRatio: 4 / 5,
                             ),
@@ -149,8 +190,48 @@ class _CVPageState extends State<CVPage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Paper(
-                    child: Text(''),
+                  RepaintBoundary(
+                    key: page2,
+                    child: Paper(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const TitleText('HOBBIES'),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: _.cvdata.hobbys!
+                                .map(
+                                  (e) => BodyText(e),
+                                )
+                                .toList(),
+                          ),
+                          const TitleText('REFERENCE'),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: _.cvdata.references!
+                                .map(
+                                  (e) => Column(
+                                    children: [
+                                      TextContent(
+                                        name: 'Name',
+                                        data: e.name,
+                                      ),
+                                      TextContent(
+                                        name: 'Tel',
+                                        data: e.getPhoneFormat,
+                                      ),
+                                      TextContent(
+                                        name: 'Position',
+                                        data: e.position,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ],
+                      ),
+                    ),
                   )
                 ],
               ),

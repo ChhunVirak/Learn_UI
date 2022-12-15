@@ -2,7 +2,7 @@ import 'package:change_language/binding/app_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'modules/cv_gen/screen/cv_page.dart';
+import 'future_builder/fetch_screen.dart';
 
 Future<void> main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.indigo,
         // textTheme: const TextTheme(
         //   headline4: TextStyle(
         //     color: Colors.black,
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         //   ),
         // ),
       ),
-      home: const CVPage(),
+      home: const FetchScreen(),
     );
   }
 }
