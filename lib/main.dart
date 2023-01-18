@@ -1,11 +1,12 @@
 import 'package:change_language/binding/app_binding.dart';
+import 'package:change_language/helpers/local_storage.dart';
+import 'package:change_language/modules/merry_christmas/page/overlay_state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'future_builder/fetch_screen.dart';
-
 Future<void> main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorage.instance.init();
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         //   ),
         // ),
       ),
-      home: const FetchScreen(),
+      home: AppOverLay(),
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:change_language/helpers/api_base_helper.dart';
 import 'package:flutter/material.dart';
-
-import 'future_widget.dart';
+import 'package:get/get.dart';
 
 class FetchScreen extends StatefulWidget {
   const FetchScreen({Key? key}) : super(key: key);
@@ -14,6 +13,7 @@ class _FetchScreenState extends State<FetchScreen> {
   final _api = ApiBaseHelper();
 
   Future<String> fetch() async {
+    // final a = RegExp('/^');
     String result = '';
     // try {
     await _api
@@ -23,10 +23,9 @@ class _FetchScreenState extends State<FetchScreen> {
       isAuthorize: true,
     )
         .then((value) {
-      // debugPrint('Work $value');
-
-      debugPrint('${value[0]['id']}');
+      result = value.toString();
     });
+
     // } catch (_) {
     //   debugPrint('Work $_');
     // }
@@ -37,22 +36,42 @@ class _FetchScreenState extends State<FetchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: FutureBuilder(
-              future: fetch(),
-              builder: (context, snapshot) => const Text('data'),
-            ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Get.put(FetchController()).update(['api']);
+          setState(() {});
+        },
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GetBuilder<FetchController>(
+                id: 'api',
+                init: FetchController(),
+                builder: (con) {
+                  debugPrint('Getx Built');
+                  return FutureBuilder(
+                    future: fetch(),
+                    builder: (_, AsyncSnapshot<String> snapshot) {
+                      return Text('data ${snapshot.data}');
+                    },
+                  );
+                },
+              ),
+              // FutureWidget(
+              //   future: fetch(),
+              //   onWaiting: () => const Text('waiting'),
+              //   onDone: () => const Text('done'),
+              // )
+            ],
           ),
-          FutureWidget(
-            future: fetch(),
-            onWaiting: () => const Text('waiting'),
-            onDone: () => const Text('done'),
-          )
-        ],
+        ),
       ),
     );
   }
 }
+
+class FetchController extends GetxController {}

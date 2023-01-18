@@ -1,4 +1,4 @@
-// ignore_for_file: invalid_use_of_protected_member
+// ignore_for_file: invalid_use_of_protected_member, no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
