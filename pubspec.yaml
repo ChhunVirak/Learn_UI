@@ -36,7 +36,9 @@ dependencies:
   firebase_core: ^1.20.0
   flutter:
     sdk: flutter
+  flutter_animate: ^3.0.0
   flutter_gen: ^5.0.1
+  flutter_localization: ^0.1.9
   flutter_svg: ^1.1.1+1
   get: ^4.6.1
   google_fonts: ^3.0.1

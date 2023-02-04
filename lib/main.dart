@@ -1,8 +1,9 @@
-import 'package:change_language/binding/app_binding.dart';
 import 'package:change_language/helpers/local_storage.dart';
-import 'package:change_language/modules/merry_christmas/page/overlay_state.dart';
+import 'package:change_language/modules/merry_christmas/controller/animation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'modules/test_phone/test_phone.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialBinding: AppBinding(),
+      //initialBinding: AppBinding(),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -40,7 +41,15 @@ class MyApp extends StatelessWidget {
         //   ),
         // ),
       ),
-      home: AppOverLay(),
+      initialBinding: AppBinding(),
+      home: const TestPhone(),
     );
+  }
+}
+
+class AppBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(MyAnimationController());
   }
 }

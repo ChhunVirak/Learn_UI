@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AppOverLay extends StatefulWidget {
+  const AppOverLay({super.key});
+
   @override
   State<AppOverLay> createState() => _AppOverLayState();
 }
 
 class _AppOverLayState extends State<AppOverLay> {
-  OverlayEntry? _overlayEntry;
+  // OverlayEntry? _overlayEntry;
 
   final menu = [
     'Accounts',
