@@ -77,7 +77,7 @@ class _DropDownFieldState extends State<DropDownField> {
       ),
     );
     overlayState = Overlay.of(context, rootOverlay: true);
-    overlayState?.insert(overlay);
+    overlayState.insert(overlay);
     // overlayState.
   }
 

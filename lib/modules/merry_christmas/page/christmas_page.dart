@@ -1,9 +1,8 @@
-import 'package:change_language/modules/merry_christmas/controller/animation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 
-class ChristMasPage extends GetView<MyAnimationController> {
+class ChristMasPage extends GetView {
   const ChristMasPage({super.key});
 
   @override
@@ -24,11 +23,8 @@ class ChristMasPage extends GetView<MyAnimationController> {
       // backgroundColor: Colors.black,
       body: SafeArea(
         child: Center(
-          child: StreamBuilder<double>(
-            builder: (_, snapshot) => Text(
-              snapshot.data.toString(),
-            ),
-          ),
+          child: controller.obx(),
+
           // child: Container(
           //   width: 50,
           //   height: 100,

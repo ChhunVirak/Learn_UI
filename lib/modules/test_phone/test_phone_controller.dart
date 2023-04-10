@@ -1,15 +1,30 @@
-import 'dart:math';
+import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
 class TestPhoneController extends GetxController {
-  Random random = Random();
-  Color bgColor = Colors.white;
+  final tick = 1.obs;
+  Timer? timer;
 
-  void onChangeColor() {
-    final colo = 0xff000000 + random.nextInt(100000);
-    bgColor = Color(colo);
-    update();
+  void clockRunner() {
+    timer = Timer.periodic(
+      const Duration(seconds: 1),
+      (t) {
+        if (tick.value == 60) {
+          tick.value = 0;
+        } else {
+          tick.value = tick.value + 1;
+        }
+
+        // tick(t.tick);
+        // debugPrint('${t.tick}');
+      },
+    );
+  }
+
+  @override
+  void onReady() {
+    clockRunner();
+    super.onReady();
   }
 }

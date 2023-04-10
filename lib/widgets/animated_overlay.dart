@@ -324,7 +324,7 @@ class MyApp {
       },
     );
 
-    overlayState!.insert(overlayEntry);
+    overlayState.insert(overlayEntry);
   }
 }
 

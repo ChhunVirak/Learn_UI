@@ -14,6 +14,8 @@ class Apptour extends StatefulWidget {
 class _ApptourState extends State<Apptour> {
   int elapsed = 10;
   final controller = Get.put(ControllerCount());
+
+  final globalKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,15 +56,17 @@ class _ApptourState extends State<Apptour> {
             width: double.infinity,
             child: AnimatedSwitcher(
               transitionBuilder: (child, animation) {
-                return ScaleTransition(
-                  scale: animation,
+                return SlideTransition(
+                  position:
+                      Tween<Offset>(begin: Offset.zero, end: const Offset(0, 1))
+                          .animate(animation),
                   child: child,
                 );
               },
-              duration: const Duration(seconds: 1),
+              duration: const Duration(milliseconds: 200),
               child: Text(
                 "${controller.i.value}",
-                key: ValueKey(elapsed),
+                key: globalKey,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,

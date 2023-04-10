@@ -1,9 +1,9 @@
 import 'package:change_language/helpers/local_storage.dart';
-import 'package:change_language/modules/merry_christmas/controller/animation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'modules/test_phone/test_phone.dart';
+import 'modules/auth/screen/auth_screen.dart';
+import 'modules/test_phone/test_phone_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         // ),
       ),
       initialBinding: AppBinding(),
-      home: const TestPhone(),
+      home: const AuthScreen(),
     );
   }
 }
@@ -50,6 +50,6 @@ class MyApp extends StatelessWidget {
 class AppBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(MyAnimationController());
+    Get.put(TestPhoneController());
   }
 }

@@ -1,30 +1,25 @@
-import 'dart:math';
-
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MyAnimationController extends GetxController
-    with GetSingleTickerProviderStateMixin {
-  AnimationController? animationController;
+class MyState<T1, T2> {
+  //T3, T4, T5, . . .
+  T1? state1;
+  T2? state2;
 
-  final name1 = 'Virak'.obs;
-  final name2 = 'Virak'.obs;
+  MyState({
+    this.state1,
+    this.state2,
+  });
+}
 
+abstract class BaseController<T1, T2> extends GetxController
+    with StateMixin<MyState<T1, T2>> {}
+
+class MultipleStateController extends BaseController<String, int> {
   @override
   void onInit() {
-    animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 1),
-    );
-
+    change(null, status: RxStatus.empty()); //eg. Initial empty
+    change(MyState(state1: 'Fanny', state2: 18),
+        status: RxStatus.empty()); //eg. Initial Value
     super.onInit();
-  }
-
-  Stream<double> getRandomValues() async* {
-    var random = Random(2);
-    while (true) {
-      await Future.delayed(const Duration(seconds: 1));
-      yield random.nextDouble();
-    }
   }
 }

@@ -1,59 +1,64 @@
-import 'package:change_language/modules/home/controllers/home_controller.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class AnimatedListt extends StatelessWidget {
+class AnimatedListt extends StatefulWidget {
   const AnimatedListt({Key? key}) : super(key: key);
 
   @override
+  State<AnimatedListt> createState() => _AnimatedListtState();
+}
+
+class _AnimatedListtState extends State<AnimatedListt> {
+  List<Data> data = <Data>[
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data(),
+    Data()
+  ];
+
+  int currentindex = 0;
+  @override
   Widget build(BuildContext context) {
-    final GlobalKey<AnimatedListState> key = GlobalKey();
-    final cont = Get.put(BookController());
     return Scaffold(
-      body: Row(
-        children: [
-          Expanded(
-            child: Draggable(
-              feedback: Container(
-                color: Colors.red,
-                height: 50,
-                width: 50,
-              ),
-              child: Container(
-                color: Colors.blue,
-                height: 50,
-                width: 50,
-              ),
-            ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: SafeArea(
+          child: Row(
+            children: data.asMap().entries.map((e) {
+              return Card(
+                key: e.value.key = GlobalKey(),
+                child: Text('${e.key + 1} Name'),
+              );
+            }).toList(),
           ),
-          const Spacer(
-            flex: 2,
-          ),
-          DragTarget(builder: (context, list1, list2) {
-            return Container();
-          })
-        ],
+        ),
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           FloatingActionButton(
-            onPressed: () {
-              key.currentState!
-                  .insertItem(0, duration: const Duration(seconds: 1));
-              // cont.myList.add(1);
-              cont.myList.refresh();
-              cont.update();
-            },
+            onPressed: () {},
             child: const Icon(Icons.remove),
           ),
           FloatingActionButton(
             onPressed: () {
-              key.currentState!
-                  .insertItem(0, duration: const Duration(seconds: 1));
-              cont.myList.add(1);
-              cont.myList.refresh();
-              cont.update();
+              currentindex += 1;
+              scrolltoIndex(currentindex);
             },
             child: const Icon(Icons.add),
           ),
@@ -61,4 +66,24 @@ class AnimatedListt extends StatelessWidget {
       ),
     );
   }
+
+  void scrolltoIndex(int index) {
+    if (data.length >= index) {
+      final itemContext = data[index].key?.currentContext;
+      Scrollable.ensureVisible(
+        itemContext!,
+        alignment: 0.5,
+        duration: const Duration(milliseconds: 500),
+      );
+    }
+  }
+}
+
+class Data {
+  GlobalKey? key;
+  String? item;
+  Data({
+    this.key,
+    this.item,
+  });
 }
