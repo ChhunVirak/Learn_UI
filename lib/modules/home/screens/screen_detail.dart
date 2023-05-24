@@ -1,28 +1,15 @@
-import 'package:change_language/modules/home/controllers/home_controller.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:change_language/modules/home/controllers/book_detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DetailScreen extends StatefulWidget {
-  final int? id;
+class DetailScreen extends StatelessWidget {
+  final String? id;
 
   const DetailScreen({
     Key? key,
     this.id,
   }) : super(key: key);
-
-  @override
-  State<DetailScreen> createState() => _DetailScreenState();
-}
-
-class _DetailScreenState extends State<DetailScreen> {
-  final bookController = Get.put(BookController());
-
-  @override
-  void initState() {
-    super.initState();
-    bookController.fetchBookDetail(widget.id!);
-  }
 
   Widget customBuyButton(BuildContext context) {
     return GestureDetector(
@@ -50,145 +37,186 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     double heigh = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+
+    final bookController = BookDetailController();
+
     return Scaffold(
-      body: Obx(
-        () => bookController.loading.value
-            ? const Center(
-                child: CupertinoActivityIndicator(
-                  radius: 20,
-                ),
-              )
-            : Stack(
+      body: GetBuilder<BookDetailController>(
+        dispose: (state) {
+          // Get.delete<BookDetailController>(
+          //     force: true); //Call This if you put dependancy
+        },
+        init: bookController,
+        initState: (s) {
+          bookController.fetchBookDetail(id);
+        },
+        builder: (controller) => controller.obx(
+          (state) => Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              Align(
                 alignment: Alignment.topCenter,
-                children: [
-                  Container(
-                    alignment: Alignment.topCenter,
-                    height: heigh,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                              bookController.bookDetail.value.image!),
-                        ),
-                      ),
-                      height: heigh / 2,
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: CachedNetworkImageProvider(state!.image!),
                     ),
                   ),
+                  height: heigh / 2,
+                  width: width,
+                ),
+              ),
 
-                  ///
-                  Positioned(
-                    bottom: 0,
-                    child: Stack(
-                      alignment: Alignment.bottomRight,
-                      children: [
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(25),
-                              topLeft: Radius.circular(25),
-                            ),
-                          ),
-                          height: (heigh / 2) + 20,
-                          width: width,
-                          // alignment: Alignment.center,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 20, right: 20, top: 35),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+              ///
+              Positioned(
+                bottom: 0,
+                child: Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(25),
+                          topLeft: Radius.circular(25),
+                        ),
+                      ),
+                      height: (heigh / 2) + 20,
+                      width: width,
+                      // alignment: Alignment.center,
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 35),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
                               children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        bookController.bookDetail.value.title ??
-                                            '',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleLarge!
-                                            .copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              // overflow: TextOverflow.ellipsis,
-                                            ),
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.bookmark,
-                                      color: Colors.amber[700],
-                                    )
-                                  ],
+                                Expanded(
+                                  child: Text(
+                                    state.title ?? '',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge!
+                                        .copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          // overflow: TextOverflow.ellipsis,
+                                        ),
+                                  ),
                                 ),
-                                const SizedBox(height: 5),
+                                Icon(
+                                  Icons.bookmark,
+                                  color: Colors.amber[700],
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              'by ${state.authors ?? 'unknown'}',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            // const SizedBox(height: 1),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                showStar(),
+                                const SizedBox(width: 5),
                                 Text(
-                                  'by ${bookController.bookDetail.value.authors ?? 'unknown'}',
-                                  style: Theme.of(context).textTheme.bodySmall,
-                                ),
-                                // const SizedBox(height: 1),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    showStar(),
-                                    const SizedBox(width: 5),
-                                    Text(
-                                      '5.0',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .copyWith(
-                                              color: Colors.amber[700],
-                                              fontSize: 14),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Text(
-                                      '(1534)',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .copyWith(
-                                              color: Colors.amber[700],
-                                              fontSize: 14),
-                                    ),
-                                    const Spacer(),
-                                    Text(
-                                      bookController.bookDetail.value.price ==
-                                              null
-                                          ? 'Unavialable'
-                                          : '${bookController.bookDetail.value.price}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge!
-                                          .copyWith(color: Colors.black),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  'About the book',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium!
-                                      .copyWith(fontWeight: FontWeight.w600),
-                                ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  bookController.bookDetail.value.desc ?? '',
+                                  '5.0',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall!
-                                      .copyWith(height: 1.5),
+                                      .copyWith(
+                                          color: Colors.amber[700],
+                                          fontSize: 14),
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  '(1534)',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                          color: Colors.amber[700],
+                                          fontSize: 14),
+                                ),
+                                const Spacer(),
+                                Text(
+                                  state.price == null
+                                      ? 'Unavialable'
+                                      : '${state.price}',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(color: Colors.black),
                                 ),
                               ],
                             ),
-                          ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'About the book',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(fontWeight: FontWeight.w600),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              state.desc ?? '',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(height: 1.5),
+                            ),
+                            if (controller.status.isLoadingMore)
+                              Text(
+                                'Loading More',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall!
+                                    .copyWith(height: 1.5),
+                              ),
+                          ],
                         ),
-                        customBuyButton(context),
-                      ],
+                      ),
                     ),
+                    customBuyButton(context),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          onError: (error) => Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Something went wrong please try again'),
+              Text(error ?? ''),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Back'),
+                  ),
+                  const SizedBox(width: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      controller.fetchBookDetail(id);
+                    },
+                    child: const Text('Retry'),
                   ),
                 ],
               ),
+            ],
+          )),
+          onLoading: const Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
       ),
     );
   }

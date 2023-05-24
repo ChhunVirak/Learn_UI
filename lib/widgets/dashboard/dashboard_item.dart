@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../modules/dashboard/models/item_model.dart';
+
 class DashBoardItem extends StatelessWidget {
-  final String? text;
-  final String? date;
-  final double? value;
-  final Color? sheetColor;
+  final ItemModel? itemModel;
+
   final GestureTapCallback? onTap;
-  final bool selected;
+
   const DashBoardItem({
     Key? key,
-    this.text,
+    this.itemModel,
     this.onTap,
-    this.date,
-    this.sheetColor,
-    this.value,
-    this.selected = false,
   }) : super(key: key);
 
   @override
@@ -41,9 +37,9 @@ class DashBoardItem extends StatelessWidget {
         child: Row(
           children: [
             AnimatedContainer(
-              height: selected ? 30 : 10,
+              height: 20,
               decoration: BoxDecoration(
-                color: sheetColor ?? Colors.transparent,
+                color: itemModel?.sheetColor ?? Colors.transparent,
                 borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(10),
                   bottomRight: Radius.circular(10),
@@ -59,14 +55,14 @@ class DashBoardItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    text ?? '',
+                    itemModel?.title ?? '',
                     style: Theme.of(context)
                         .textTheme
                         .labelLarge!
                         .copyWith(fontSize: 15, fontWeight: FontWeight.w300),
                   ),
                   Text(
-                    date ?? '- - -',
+                    itemModel?.date ?? '- - -',
                     style: Theme.of(context).textTheme.labelSmall!.copyWith(
                         decoration: TextDecoration.underline,
                         fontWeight: FontWeight.w200),
@@ -80,7 +76,7 @@ class DashBoardItem extends StatelessWidget {
                 children: [
                   Text.rich(
                     TextSpan(
-                      text: '${(value! * 100).round()}',
+                      text: '${(itemModel!.progress! * 100).round()}',
                       style: Theme.of(context)
                           .textTheme
                           .labelSmall!
@@ -102,7 +98,7 @@ class DashBoardItem extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: LinearProgressIndicator(
-                        value: value ?? 0,
+                        value: itemModel?.progress ?? 0,
                       ),
                     ),
                   ),

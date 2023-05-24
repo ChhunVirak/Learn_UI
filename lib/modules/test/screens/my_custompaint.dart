@@ -79,10 +79,10 @@ class _MyCustomPaintState extends State<MyCustomPaint> {
           ),
           Container(
             color: Colors.white,
-            child: Center(
+            child: const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [],
+                children: [],
               ),
             ),
           ),

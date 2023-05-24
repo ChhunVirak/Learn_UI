@@ -69,10 +69,10 @@ class _AppOverLayState extends State<AppOverLay> {
               padding: const EdgeInsets.only(left: 20, right: 50),
               width: double.infinity,
               color: Colors.blue,
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     'Quick Transfer',
                     style: TextStyle(color: Colors.white),
@@ -90,10 +90,10 @@ class _AppOverLayState extends State<AppOverLay> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               width: double.infinity,
               color: Colors.red[400],
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     'Quick Payment',
                     style: TextStyle(color: Colors.white),

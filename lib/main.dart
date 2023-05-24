@@ -1,13 +1,13 @@
-import 'package:change_language/helpers/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'modules/auth/screen/auth_screen.dart';
+import 'modules/learn_animation/screen/animation_screen.dart';
 import 'modules/test_phone/test_phone_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await LocalStorage.instance.init();
+  Get.changeThemeMode(ThemeMode.dark);
+  // await LocalStorage.instance.init();
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
@@ -21,8 +21,11 @@ class MyApp extends StatelessWidget {
       //initialBinding: AppBinding(),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
+
+      theme: ThemeData.light(
+        useMaterial3: true,
+        // appBarTheme: const AppBarTheme(backgroundColor: Colors.yellow),
+
         // textTheme: const TextTheme(
         //   headline4: TextStyle(
         //     color: Colors.black,
@@ -41,8 +44,16 @@ class MyApp extends StatelessWidget {
         //   ),
         // ),
       ),
+
+      darkTheme: ThemeData.dark(
+        useMaterial3: true,
+        // appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
+        // colorScheme: ,
+      ).copyWith(
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
+      ),
       initialBinding: AppBinding(),
-      home: const AuthScreen(),
+      home: const AnimationScreen(),
     );
   }
 }

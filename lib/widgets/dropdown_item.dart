@@ -71,14 +71,14 @@ class _DropDownItemState extends State<DropDownItem> {
                   !widget.isSelect!
                       ? Text(widget.itemList!['Name'] ?? "",
                           style:
-                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
                                     fontSize: 14,
                                   ),
                           overflow: TextOverflow.ellipsis)
                       : Text(widget.itemList!['Name']!,
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1!
+                              .bodyLarge!
                               .copyWith(fontSize: 14),
                           overflow: TextOverflow.ellipsis),
                   widget.isUserAccount!
@@ -86,7 +86,7 @@ class _DropDownItemState extends State<DropDownItem> {
                           padding: const EdgeInsets.only(top: 7.0),
                           child: Text(
                             widget.itemList!['accountName']!,
-                            style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         )
                       : Container(),
@@ -97,7 +97,7 @@ class _DropDownItemState extends State<DropDownItem> {
                             widget.itemList!['accountNumber']!,
                             style: Theme.of(context)
                                 .textTheme
-                                .headline3!
+                                .displaySmall!
                                 .copyWith(fontSize: 13),
                           ),
                         )
@@ -107,7 +107,7 @@ class _DropDownItemState extends State<DropDownItem> {
                           'hello',
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1!
+                              .bodyLarge!
                               .copyWith(fontSize: 12),
                         )
                       : Container()

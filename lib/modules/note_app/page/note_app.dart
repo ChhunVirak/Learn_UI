@@ -29,9 +29,9 @@ class _NoteAppState extends State<NoteApp> {
           child: Container(
             width: double.maxFinite,
             color: Colors.transparent,
-            child: Column(
+            child: const Column(
               mainAxisSize: MainAxisSize.max,
-              children: const [Text('data')],
+              children: [Text('data')],
             ),
           ),
         ),

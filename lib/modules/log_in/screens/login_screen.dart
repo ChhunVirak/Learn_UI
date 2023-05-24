@@ -72,10 +72,10 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
-                children: const [
+                children: [
                   Expanded(
                     child: Divider(
                       indent: 1,
@@ -130,8 +130,8 @@ class LoginScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Theme.of(context).scaffoldBackgroundColor),
               alignment: Alignment.centerLeft,
-              child: Row(
-                children: const [
+              child: const Row(
+                children: [
                   Icon(Icons.remove_red_eye_outlined),
                   SizedBox(
                     width: 10,
@@ -153,8 +153,8 @@ class LoginScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Theme.of(context).scaffoldBackgroundColor),
               alignment: Alignment.centerLeft,
-              child: Row(
-                children: const [
+              child: const Row(
+                children: [
                   Icon(Icons.remove_red_eye_outlined),
                   SizedBox(
                     width: 10,

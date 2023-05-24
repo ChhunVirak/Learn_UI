@@ -28,13 +28,6 @@ class TestPhone extends GetView<TestPhoneController> {
   }
 }
 
-class _MySca extends Scaffold{
-  const _MySca({super.key});
-  @override
-
-  PreferredSizeWidget? get appBar => super.appBar;
-}
-
 class ClockPainter extends CustomPainter {
   final int tick;
   ClockPainter({this.tick = 0});

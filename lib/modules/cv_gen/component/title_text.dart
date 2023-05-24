@@ -15,7 +15,7 @@ class TitleText extends StatelessWidget {
         text ?? '',
         style: Theme.of(context)
             .textTheme
-            .headline6!
+            .titleLarge!
             .copyWith(decoration: TextDecoration.underline),
       ),
     );

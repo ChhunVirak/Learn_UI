@@ -49,9 +49,9 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
                     ),
                   ],
                 ),
-                child: Column(
+                child: const Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children: [
                     ListTile(
                       title: Text('Hello'),
                     ),

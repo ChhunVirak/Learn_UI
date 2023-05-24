@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
@@ -29,35 +30,36 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('Built Apr');
     return GestureDetector(
       onTap: onTap,
       child: Container(
         color: Colors.transparent,
-        margin: const EdgeInsets.only(right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               height: MediaQuery.of(context).size.height * 0.2,
-              width: MediaQuery.of(context).size.width * 0.3,
+              // width: MediaQuery.of(context).size.width * 0.3,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   filterQuality: FilterQuality.high,
-                  image: NetworkImage(imgUrl!),
+                  image: CachedNetworkImageProvider(imgUrl ?? ''),
                 ),
               ),
             ),
             const SizedBox(height: 5),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.3,
+              // width: MediaQuery.of(context).size.width * 0.3,
               child: Text(
                 title ?? "No Title",
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
                     .copyWith(overflow: TextOverflow.ellipsis),
+                maxLines: 2,
               ),
             ),
             const SizedBox(height: 5),

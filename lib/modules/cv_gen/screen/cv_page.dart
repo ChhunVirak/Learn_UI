@@ -69,22 +69,22 @@ class _CVPageState extends State<CVPage> {
               data: ThemeData(
                 primarySwatch: Colors.red,
                 textTheme: const TextTheme(
-                  headline4: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    decoration: TextDecoration.underline,
-                  ),
-                  headline6: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
-                  ),
-                  subtitle2: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                  ),
+                  // headline4: TextStyle(
+                  //   color: Colors.black,
+                  //   fontWeight: FontWeight.bold,
+                  //   fontSize: 14,
+                  //   decoration: TextDecoration.underline,
+                  // ),
+                  // headline6: TextStyle(
+                  //   color: Colors.black,
+                  //   fontWeight: FontWeight.w600,
+                  //   fontSize: 12,
+                  // ),
+                  // subtitle2: TextStyle(
+                  //   color: Colors.black,
+                  //   fontWeight: FontWeight.w400,
+                  //   fontSize: 12,
+                  // ),
                 ),
               ),
               child: ListView(

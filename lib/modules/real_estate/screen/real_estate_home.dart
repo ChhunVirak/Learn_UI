@@ -1,5 +1,4 @@
 import 'package:change_language/constant/app_constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RealEstate extends StatefulWidget {
@@ -16,13 +15,6 @@ class _RealEstateState extends State<RealEstate> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            CupertinoIcons.back,
-            color: textColor,
-          ),
-        ),
         title: const Text(
           'បញ្ជីលក់',
           style: TextStyle(color: textColor),
@@ -89,8 +81,8 @@ class _RealEstateState extends State<RealEstate> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     Text('A0'),
                     Spacer(),
                     Text('\$50.000'),
